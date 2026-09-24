@@ -24,7 +24,7 @@ alter table public.sessions
   add column if not exists level public.session_level;
 
 update public.sessions
-set level = data.level
+set level = data.level::public.session_level
 from (
   values
     ('opening-keynote', 'beginner'),
