@@ -39,4 +39,15 @@ describe("SessionDetailPage", () => {
     expect(screen.getByText("Agentic AI")).toBeInTheDocument();
     expect(screen.getByText("Intermediate")).toBeInTheDocument();
   });
+
+  it("calls notFound() when the session doesn't exist", async () => {
+    fetchSessionById.mockResolvedValue(null);
+
+    // notFound() throws (it never returns), marked with Next's fallback
+    // digest so the framework's error boundary renders the 404 UI instead
+    // of this bubbling up as a real crash.
+    await expect(
+      SessionDetailPage({ params: Promise.resolve({ id: "unknown" }) }),
+    ).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;404" });
+  });
 });
