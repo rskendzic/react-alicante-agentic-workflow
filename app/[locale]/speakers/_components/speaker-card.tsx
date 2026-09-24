@@ -6,7 +6,7 @@ import {
 } from "@/components/atoms/card";
 import { Link } from "@/i18n/navigation";
 import type { SpeakerSessions } from "@/utils/speakers";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, VisuallyHidden } from "@chakra-ui/react";
 
 export function SpeakerCard({ speaker }: { speaker: SpeakerSessions }) {
   return (
@@ -15,22 +15,26 @@ export function SpeakerCard({ speaker }: { speaker: SpeakerSessions }) {
         <CardTitle fontSize="md">{speaker.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Flex direction="column" gap="3">
+        <Flex as="ul" direction="column" gap="3" listStyleType="none">
           {speaker.sessions.map((session) => (
-            <Link key={session.id} href={`/sessions/${session.id}`}>
-              <Flex
-                direction="column"
-                transition="color 0.2s"
-                _hover={{ color: "var(--accent-hex)" }}
-              >
-                <Text fontSize="xs" color="var(--text-muted)">
-                  {session.startTime}
-                </Text>
-                <Text fontSize="sm" fontWeight="medium">
-                  {session.title}
-                </Text>
-              </Flex>
-            </Link>
+            <Flex as="li" key={session.id}>
+              <Link href={`/sessions/${session.id}`}>
+                <Flex
+                  direction="column"
+                  paddingY="2"
+                  transition="color 0.2s"
+                  _hover={{ color: "var(--accent-muted)" }}
+                >
+                  <VisuallyHidden>{speaker.name}: </VisuallyHidden>
+                  <Text fontSize="xs" color="var(--text-secondary)">
+                    {session.startTime}
+                  </Text>
+                  <Text fontSize="sm" fontWeight="medium">
+                    {session.title}
+                  </Text>
+                </Flex>
+              </Link>
+            </Flex>
           ))}
         </Flex>
       </CardContent>

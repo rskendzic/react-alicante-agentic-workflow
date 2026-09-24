@@ -60,4 +60,23 @@ describe("SpeakerCard", () => {
       "/en/sessions/opening-keynote",
     );
   });
+
+  it("includes the speaker's name in each session link's accessible name", () => {
+    render(
+      <SpeakerCard
+        speaker={speaker({
+          name: "Sofia Almeida",
+          sessions: [session({ title: "Micro-Frontends" })],
+        })}
+      />,
+    );
+
+    // Ensures a screen reader user navigating by links list/rotor can tell
+    // which speaker a link belongs to, not just jsdom's name computation.
+    expect(
+      screen.getByRole("link", {
+        name: /Sofia Almeida[\s\S]*Micro-Frontends/,
+      }),
+    ).toBeInTheDocument();
+  });
 });
