@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.4.0] — 2026-09-24
+
+### Features
+
+- Add a Speakers page — lists every speaker with their sessions, grouped and
+  sorted alphabetically; adds the Speakers nav link (EN/ES) (#1)
+- Show each session's level — a new `session_level` column/enum
+  (beginner/intermediate/advanced), surfaced as a badge on the session detail
+  page and in the timeline block (#2)
+
+### Maintenance
+
+- Retrigger CI ahead of the v0.4.0 release cut (no user-facing change)
+
+## Test Suite
+
+| Suite          | Status     |
+| -------------- | ---------- |
+| ESLint         | ⏳ pending |
+| Type-check     | ⏳ pending |
+| Unit tests     | ⏳ pending |
+| Build (Vercel) | ⏳ pending |
+
+CI: not yet run on `release-0-4-0` (branch not pushed yet — will run once the PR opens in Phase 3)
+
 ## [0.3.1] — 2026-09-24
 
 ### Bug Fixes
