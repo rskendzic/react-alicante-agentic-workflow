@@ -1,7 +1,8 @@
 import { Badge } from "@/components/atoms/badge";
 import { Link } from "@/i18n/navigation";
 import { fetchSessionById, fetchSessions } from "@/services/sessions";
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { formatSessionLevel } from "@/utils/session-level";
+import { Flex, Heading, Text, VisuallyHidden } from "@chakra-ui/react";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -43,7 +44,14 @@ export default async function SessionDetailPage({
 
       <Flex direction="column" gap="3">
         <Flex align="center" gap="3">
-          <Badge>{session.track}</Badge>
+          <Badge>
+            <VisuallyHidden>Track: </VisuallyHidden>
+            {session.track}
+          </Badge>
+          <Badge variant="outline">
+            <VisuallyHidden>Level: </VisuallyHidden>
+            {formatSessionLevel(session.level)}
+          </Badge>
           <Text fontSize="sm" color="var(--text-muted)">
             {session.startTime} · {session.durationMinutes} min · {session.room}
           </Text>
